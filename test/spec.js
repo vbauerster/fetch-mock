@@ -490,6 +490,21 @@ module.exports = function (fetchMock, theGlobal) {
 						});
 				});
 
+				it('respond with a 204 status', function (done) {
+					fetchMock.mock({
+						routes: {
+							name: 'route',
+							matcher: 'http://it.at.there',
+							response: 204
+						}
+					});
+					fetch('http://it.at.there')
+						.then(function (res) {
+							expect(res.status).to.equal(204);
+							done();
+						});
+				});
+
 				it('respond with a string', function (done) {
 					fetchMock.mock({
 						routes: {
